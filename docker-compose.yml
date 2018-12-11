@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: etherpad_lite_db
+    volumes:
+      - ./docker_data/postgres:/var/lib/postgresql/data
+  etherpadlite:
+    build: .
+    ports:
+      - 9001:9001
+    depends_on:
+      - "db"
